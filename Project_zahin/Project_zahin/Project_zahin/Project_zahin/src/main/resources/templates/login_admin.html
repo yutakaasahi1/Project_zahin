@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Royale Laurent</title>
+    <style>
+
+        :root {
+            --primary: #2c3e50;       /* Navy blue */
+            --secondary: #3498db;      /* Blue */
+            --light: #ffffff;         /* White */
+            --light-gray: #f8f9fa;     /* Very light gray */
+            --border-gray: #dee2e6;    /* Light border gray */
+            --text: #495057;          /* Dark gray text */
+            --text-light: #6c757d;     /* Medium gray text */
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: var(--secondary);
+            transform: translateX(-3px);
+        }
+
+        .back-link::before {
+            content: "←";
+            margin-right: 6px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 380px;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .login-header h2 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .login-form {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-gray);
+            border-radius: 5px;
+            font-size: 14px;
+            color: var(--text);
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 5px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .login-container {
+                max-width: 340px;
+            }
+
+            .login-form {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .back-link {
+                top: 15px;
+                left: 15px;
+            }
+
+            .login-container {
+                max-width: 100%;
+                border-radius: 8px;
+            }
+
+            .login-header h2 {
+                font-size: 20px;
+            }
+
+            .form-control {
+                padding: 9px 11px;
+                font-size: 13px;
+            }
+
+            .submit-btn {
+                padding: 11px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<a href="HomePageHotel" class="back-link">Back to Home</a>
+
+<div class="login-container">
+    <div class="login-header">
+        <h2>Admin Login</h2>
+    </div>
+
+
+
+    <form class="login-form" action="/login" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="Username" class="form-control"
+                   placeholder="Enter admin username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="pass_admin" class="form-control"
+                   placeholder="••••••••" required>
+        </div>
+        <div th:if="${success}" class="alert alert-success" style="color: green; margin-bottom: 15px;">
+            <span th:text="${success}"></span>
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+    </form>
+</div>
+</body>
+</html>

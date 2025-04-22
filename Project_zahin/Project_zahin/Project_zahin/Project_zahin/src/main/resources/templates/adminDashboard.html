@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Royale Laurent</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #27b427;
+      --light: #ffffff;
+      --light-gray: #f8f9fa;
+      --medium-gray: #e9ecef;
+      --text: #495057;
+      --text-light: #6c757d;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: var(--light-gray);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dashboard {
+      width: 100%;
+      max-width: 800px;
+      background: var(--light);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .dashboard-header {
+      background-color: var(--primary);
+      color: white;
+      padding: 25px 30px;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .dashboard-header h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dashboard-header .admin-info {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 5px;
+    }
+
+    .dashboard-content {
+      padding: 30px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-item {
+      background: var(--light);
+      border-radius: 8px;
+      padding: 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid var(--medium-gray);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      border-color: var(--secondary);
+    }
+
+    .menu-item a {
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    .menu-icon {
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    .menu-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .menu-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: auto;
+    }
+
+    .logout-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: var(--light);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard {
+        margin: 20px;
+        width: calc(100% - 40px);
+      }
+
+      .dashboard-header {
+        padding: 20px;
+      }
+
+      .menu {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-header h2 {
+        font-size: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .dashboard-content {
+        padding: 20px;
+      }
+
+      .menu-item {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h2>
+      <span>Admin Dashboard</span>
+      <span class="admin-info">Welcome back, Administrator</span>
+    </h2>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="menu">
+      <div class="menu-item">
+        <a href="/admin/booking-list">
+          <span class="menu-icon">📋</span>
+          <span class="menu-title">Booking List</span>
+          <span class="menu-desc">View and manage all reservations</span>
+        </a>
+      </div>
+
+      <div class="menu-item">
+        <a href="/admin/register">
+          <span class="menu-icon">👤</span>
+          <span class="menu-title">Admin Registration</span>
+          <span class="menu-desc">Register new admin accounts</span>
+        </a>
+      </div>
+
+      <div class="menu-item">
+        <a href="/admin/search-booking">
+          <span class="menu-icon">🔍</span>
+          <span class="menu-title">Search Bookings</span>
+          <span class="menu-desc">Find specific reservations</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div style="text-align: center;">
+      <a href="/login" class="logout-btn">Logout</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Management - Royale Laurent</title>
+    <style>
+      :root {
+        --primary: #2c3e50;
+        --secondary: #3498db;
+        --accent: #27b427;
+        --light: #ffffff;
+        --light-gray: #f8f9fa;
+        --medium-gray: #e9ecef;
+        --text: #495057;
+        --text-light: #6c757d;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --danger: #e74c3c;
+      }
+
+      body {
+        font-family: "Segoe UI", "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: var(--light-gray);
+        color: var(--text);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .back-link {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .back-link:hover {
+        color: var(--secondary);
+      }
+
+      h2 {
+        color: var(--primary);
+        margin: 0;
+      }
+
+      .table-container {
+        background: var(--light);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--medium-gray);
+      }
+
+      th {
+        background-color: var(--primary);
+        color: white;
+        font-weight: 500;
+        position: sticky;
+        top: 0;
+      }
+
+      tr:hover {
+        background-color: var(--light-gray);
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .status-confirmed {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .status-checkedin {
+        background-color: #cce5ff;
+        color: #004085;
+      }
+
+      .status-checkedout {
+        background-color: #e2e3e5;
+        color: #383d41;
+      }
+
+      .status-cancelled {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .action-btn {
+        padding: 6px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 13px;
+        margin-right: 5px;
+        display: inline-block;
+        transition: all 0.2s;
+      }
+
+      .view-btn {
+        background-color: var(--secondary);
+        color: white;
+      }
+
+      .edit-btn {
+        background-color: var(--accent);
+        color: white;
+      }
+
+      .cancel-btn {
+        background-color: var(--danger);
+        color: white;
+      }
+
+      .action-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .search-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .search-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid var(--medium-gray);
+        border-radius: 6px;
+        font-size: 14px;
+      }
+
+      .search-btn {
+        padding: 10px 20px;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 5px;
+      }
+
+      .page-btn {
+        padding: 8px 12px;
+        border: 1px solid var(--medium-gray);
+        background-color: var(--light);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .page-btn.active {
+        background-color: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        th,
+        td {
+          padding: 10px;
+          font-size: 14px;
+        }
+
+        .action-btn {
+          padding: 4px 8px;
+          margin-bottom: 4px;
+        }
+
+        .search-bar {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+
+        table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+  <div class="container">
+    <div class="header">
+      <a href="/admindashboard" class="back-link">Back to Dashboard</a>
+      <h2>Booking Management</h2>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Guest Name</th>
+          <th>Phone</th>
+          <th>Room Type</th>
+          <th>Check-In</th>
+          <th>Check-Out</th>
+          <th>Guests</th>
+          <th>Total Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${bookings}">
+          <td th:text="${booking.id}">12345</td>
+          <td th:text="${booking.fullName}">John Doe</td>
+          <td th:text="${booking.phone}">+1234567890</td>
+          <td th:text="${#strings.capitalize(booking.roomType)}">Double Room</td>
+          <td th:text="${#temporals.format(booking.checkin, 'yyyy-MM-dd')}">2023-10-15</td>
+          <td th:text="${#temporals.format(booking.checkout, 'yyyy-MM-dd')}">2023-10-20</td>
+          <td th:text="${booking.guests}">2</td>
+          <td>RM<span th:text="${booking.guests * 100}">200</span></td>
+          <td>
+            <span th:classappend="'status-' + ${booking.status.toLowerCase()}" class="status-badge" th:text="${booking.status}">Confirmed</span>
+          </td>
+          <td>
+            <a th:href="@{/bookings/edit/{id}(id=${booking.id})}" class="action-btn edit-btn">Edit</a>
+            <a th:href="@{/bookings/cancel/{id}(id=${booking.id})}" class="action-btn cancel-btn"
+               th:if="${booking.status != 'CANCELLED'}">Cancel</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button class="page-btn">&laquo;</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">&raquo;</button>
+    </div>
+  </div>
+  </body>
+</html>

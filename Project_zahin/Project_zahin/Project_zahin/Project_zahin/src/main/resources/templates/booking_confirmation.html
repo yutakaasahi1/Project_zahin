@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Booking Confirmation - Royale Laurent</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f3f4f6;
+            color: #2c3e50;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px 20px;
+        }
+
+        .confirmation-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .confirmation-header h2 {
+            font-size: 36px;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .confirmation-header p {
+            font-size: 18px;
+            color: #6b7280;
+        }
+
+        .warning-note {
+            background-color: #fff0f0;
+            color: #c0392b;
+            font-weight: 600;
+            text-align: center;
+            padding: 16px;
+            border-left: 5px solid #e74c3c;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .details-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 10px 0;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #374151;
+            width: 45%;
+        }
+
+        .detail-value {
+            text-align: right;
+            color: #4b5563;
+            width: 55%;
+        }
+
+        .print-btn {
+            display: block;
+            margin: 40px auto 0;
+            padding: 14px 32px;
+            background-color: #1f2937;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .print-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            body {
+                margin: 0;
+                box-shadow: none;
+                font-size: 12pt;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .detail-label,
+            .detail-value {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="confirmation-header">
+    <h2>Booking Confirmation</h2>
+    <p>Thank you for choosing Royale Laurent</p>
+</div>
+
+<div class="warning-note">
+    ⚠️ Please Screenshot or Print This Page Before Leaving
+</div>
+
+<div class="details-container">
+    <div class="detail-item">
+        <div class="detail-label">Full Name</div>
+        <div class="detail-value" th:text="${fullName}"></div>
+    </div>
+    <div class="detail-item">
+        <div class="detail-label">Phone</div>
+        <div class="detail-value" th:text="${phone}"></div>
+    </div>
+    <div class="detail-item">
+        <div class="detail-label">Location</div>
+        <div class="detail-value" th:text="${location}"></div>
+    </div>
+    <div class="detail-item">
+        <div class="detail-label">Check-in</div>
+        <div class="detail-value" th:text="${#temporals.format(checkin, 'MMMM d, yyyy')}"></div>
+    </div>
+    <div class="detail-item">
+        <div class="detail-label">Check-out</div>
+        <div class="detail-value" th:text="${#temporals.format(checkout, 'MMMM d, yyyy')}"></div>
+    </div>
+    <div class="detail-item">
+        <div class="detail-label">Room Type</div>
+        <div class="detail-value" th:text="${roomType}"></div>
+    </div>
+    <div class="detail-item">
+        <div class="detail-label">Number of Guests</div>
+        <div class="detail-value" th:text="${guests}"></div>
+    </div>
+    <div class="detail-item">
+        <div class="detail-label">Booking Date</div>
+        <div class="detail-value" th:text="${#temporals.format(bookingDate, 'MMMM d, yyyy h:mm a')}"></div>
+    </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Print Confirmation</button>
+
+</body>
+</html>

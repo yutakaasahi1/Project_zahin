@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royale Laurent - Hotel Reservation</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ffffff;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --border-gray: #ced4da;
+            --text: #495057;
+            --text-light: #6c757d;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .reservation-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        .reservation-form {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--medium-gray);
+        }
+
+        .reservation-form h2 {
+            margin: 0 0 25px 0;
+            font-size: 24px;
+            color: var(--primary);
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: var(--light);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--text);
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236c757d'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+            padding-right: 30px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Date and number input styling */
+        input[type="date"] {
+            position: relative;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .reservation-form {
+                padding: 25px;
+            }
+
+            .reservation-form h2 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .reservation-container {
+                padding: 15px;
+            }
+
+            .reservation-form {
+                padding: 20px;
+            }
+
+            .form-control {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .submit-btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="reservation-container">
+    <div class="reservation-form">
+        <h2>Hotel Reservation</h2>
+        <a href="http://localhost:8080/HomePageHotel" class="back-link">← Back to Home page</a>
+
+        <form action="/bookings/save" method="POST">            <div class="form-group">
+                <label for="name">Full Name</label>
+            <input type="text" id="name" name="fullName" class="form-control" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="e.g. 0123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <select id="location" name="location" class="form-control" required>
+                    <option value="">Select Location</option>
+                    <option value="kuala-lumpur">Royale Laurent Kuala Lumpur</option>
+                    <option value="penang">Royale Laurent Penang</option>
+                    <option value="bali">Royale Laurent Bali</option>
+                    <option value="san-diego">Royale Laurent San Diego</option>
+                    <option value="oslo">Royale Laurent Oslo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="checkin">Check-in Date</label>
+                <input type="date" id="checkin" name="checkin" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkout">Check-out Date</label>
+                <input type="date" id="checkout" name="checkout" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="room">Room Type</label>
+                <select id="room" name="roomType" class="form-control" required>
+                    <option value="single">Single Room</option>
+                    <option value="double">Double Room</option>
+                    <option value="suite">Suite</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">Number of Guests</label>
+                <input type="number" id="guests" name="guests" class="form-control" min="1" max="10" required>
+            </div>
+
+            <button type="submit" class="submit-btn" >Book Now</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royale Laurent Hotels</title>
+  <style>
+    :root {
+      --primary: #37c237;
+      --dark: #121212;
+      --darker: #0a0a0a;
+      --light: #f5f5f5;
+      --gray: #333;
+      --lighter-gray: #444;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--light);
+      color: var(--light);
+      line-height: 1.6;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .slideshow-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .mySlides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.7);
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      width: 80%;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      color: white;
+      letter-spacing: 2px;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      color: white;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 20px;
+      margin-top: -22px;
+      color: black;
+      font-weight: bold;
+      font-size: 28px;
+      transition: 0.3s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 3;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .dot-container {
+      text-align: center;
+      padding: 20px;
+      position: absolute;
+      bottom: 40px;
+      width: 100%;
+      z-index: 3;
+    }
+
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 8px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: var(--primary);
+      transform: scale(1.2);
+    }
+
+    .fade {
+      animation: fade 1.5s ease;
+    }
+
+    @keyframes fade {
+      from { opacity: .4 }
+      to { opacity: 1 }
+    }
+
+    .hotel-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--lighter-gray);
+    }
+
+    .hotel-section:last-child {
+      border-bottom: none;
+    }
+
+    .hotel-image {
+      width: 50%;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .hotel-image:hover {
+      transform: scale(1.02);
+    }
+
+    .hotel-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .hotel-info {
+      width: 50%;
+      padding: 20px;
+    }
+
+    .hotel-info h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .hotel-info p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      color: black;
+    }
+
+    .button {
+      background-color: var(--primary);
+      color: var(--dark);
+      padding: 14px 28px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-size: 1rem;
+      display: inline-block;
+      margin-top: 15px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .button:hover {
+      background-color: #2da82d;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(55, 194, 55, 0.3);
+    }
+
+    footer {
+      background-color: var(--darker);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      text-align: left;
+    }
+
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+
+    .footer-column p, .footer-column a {
+      color: #bbb;
+      margin-bottom: 15px;
+      display: block;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--primary);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .contact-item img {
+      width: 30px;
+      height: 30px;
+      margin-right: 15px;
+      filter: invert(70%);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover img {
+      transform: scale(1.1);
+      filter: invert(58%) sepia(64%) saturate(482%) hue-rotate(72deg) brightness(95%) contrast(90%);
+    }
+
+    .copyright {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray);
+      color: #777;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1.2rem;
+      }
+
+      .hotel-section {
+        flex-direction: column;
+        padding: 50px 20px;
+      }
+
+      .hotel-image, .hotel-info {
+        width: 100%;
+      }
+
+      .hotel-image img {
+        height: 300px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <img src="suasana1.jpg" alt="Kuala Lumpur Royale Laurent">
+    </div>
+    <div class="mySlides fade">
+      <img src="suasana2.jpg" alt="Penang Royale Laurent">
+    </div>
+    <div class="mySlides fade">
+      <img src="suasana3.jpg" alt="Bali Royale Laurent">
+    </div>
+    <div class="mySlides fade">
+      <img src="suasana4.jpg" alt="San Diego Royale Laurent">
+    </div>
+    <div class="mySlides fade">
+      <img src="suasana5.jpg" alt="Oslo Royale Laurent">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    <div class="hero-content">
+      <h1>Royale Laurent</h1>
+      <p>Luxury Redefined. Experience Unmatched Elegance.</p>
+      <a href="#kuala-lumpur" class="button">Discover Our Hotels</a>
+    </div>
+
+    <div class="dot-container">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+      <span class="dot" onclick="currentSlide(5)"></span>
+    </div>
+  </div>
+</div>
+
+<section id="kuala-lumpur" class="hotel-section">
+  <div class="hotel-image">
+    <img src="KL.jpg" alt="Kuala Lumpur Royale Laurent">
+  </div>
+  <div class="hotel-info">
+    <h2>Kuala Lumpur Royale Laurent</h2>
+    <p>Experience luxury and comfort at our beautiful hotel in the heart of Kuala Lumpur city.</p>
+    <p>Book your stay now and enjoy exclusive facilities in Kuala Lumpur ♡</p>
+    <a href="/bookings/new?location=kuala-lumpur" class="button">Book Now</a>
+
+  </div>
+</section>
+
+<section id="penang" class="hotel-section">
+  <div class="hotel-info">
+    <h2>Penang Royale Laurent</h2>
+    <p>Experience luxury and comfort in our beautiful hotel on the big island of Penang, which has a variety of interesting art.</p>
+    <p>Book your stay now and enjoy exclusive facilities in Penang ♡</p>
+    <a href="/bookings/new?location=penang" class="button">Book Now</a>
+  </div>
+  <div class="hotel-image">
+    <img src="Penang.jpg" alt="Penang Royale Laurent">
+  </div>
+</section>
+
+<section id="oslo" class="hotel-section">
+  <div class="hotel-image">
+    <img src="Oslo.jpg" alt="Oslo Royale Laurent">
+  </div>
+  <div class="hotel-info">
+    <h2>Oslo Royale Laurent</h2>
+    <p>Experience luxury and comfort at our beautiful hotel in the heart of Oslo, Norway. Hotel in the main winter countries of the world.</p>
+    <p>Book your stay now and enjoy exclusive facilities in Oslo ♡</p>
+    <a href="/bookings/new?location=oslo" class="button">Book Now</a>
+  </div>
+</section>
+
+<section id="bali" class="hotel-section">
+  <div class="hotel-info">
+    <h2>Bali Royale Laurent</h2>
+    <p>Experience luxury and comfort at our beautiful hotel on the island of Bali that has a variety of local cultures.</p>
+    <p>Book your stay now and enjoy exclusive facilities in Bali ♡</p>
+    <a href="/bookings/new?location=bali" class="button">Book Now</a>
+  </div>
+  <div class="hotel-image">
+    <img src="Bali.jpeg" alt="Bali Royale Laurent">
+  </div>
+</section>
+
+<section id="san-diego" class="hotel-section">
+  <div class="hotel-image">
+    <img src="SanD.jpg" alt="San Diego Royale Laurent">
+  </div>
+  <div class="hotel-info">
+    <h2>San Diego Royale Laurent</h2>
+    <p>Experience luxury and comfort at our beautiful hotel on a beautiful beach in the city of California.</p>
+    <p>Book your stay now and enjoy exclusive facilities in San Diego ♡</p>
+    <a href="/bookings/new?location=san-diego" class="button">Book Now</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>Royale Laurent</h3>
+      <p>Luxury Hotels & Resorts Worldwide</p>
+      <p>Experience unparalleled comfort and service at our premier locations across the globe.</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Contact Us</h3>
+      <div class="contact-item">
+        <img src="calllogo.png" alt="Phone">
+        <span>+60 13-560 0779 (YUTAKA)</span>
+      </div>
+      <div class="contact-item">
+        <img src="calllogo.png" alt="Phone">
+        <span>+60 10-719 0937 (GREENZ)</span>
+      </div>
+      <div class="contact-item">
+        <img src="gmaillogo.png" alt="Email">
+        <span>kl2307014322@student.uptm.edu.my</span>
+      </div>
+    </div>
+
+    <div class="footer-column">
+      <h3>Follow Us</h3>
+      <div class="social-links">
+        <a href="https://www.instagram.com/hotel/">
+          <img src="Instagram_icon.png" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com/groups/hotelreviewmalaysia/?ref=share&mibextid=NSMWBT">
+          <img src="fbicon.png" alt="Facebook">
+        </a>
+        <a href="/login">
+          <img src="adminlogo.jpg" alt="Admin Login">
+        </a>
+      </div>
+      <p><a href="https://www.instagram.com/hotel/">@royalelaurenthotels</a></p>
+      <p><a href="https://www.facebook.com/groups/hotelreviewmalaysia/?ref=share&mibextid=NSMWBT">Royale Laurent Hotels and Resorts</a></p>
+      <p><a href="/login">Admin Login</a></p>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <p>&copy; 2023 Royale Laurent Hotels & Resorts. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+  var slideIndex = 0;
+  var slideInterval;
+
+  // Initialize slideshow
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    clearTimeout(slideInterval);
+    slideIndex += n;
+    var slides = document.getElementsByClassName("mySlides");
+    if (slideIndex >= slides.length) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = slides.length - 1;
+    showSlides();
+  }
+
+  function currentSlide(n) {
+    clearTimeout(slideInterval);
+    slideIndex = n - 1;
+    showSlides();
+  }
+
+  function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex].style.display = "block";
+    dots[slideIndex].className += " active";
+
+    // Auto-advance every 5 seconds
+    slideInterval = setTimeout(showSlides, 5000);
+  }
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
