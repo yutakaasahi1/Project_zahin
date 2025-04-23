@@ -98,7 +98,7 @@ public class BookingController {
         return "editBooking";
     }
 
-    // Update booking - Corrected version
+    // Update booking 
     @PostMapping("/update/{id}")
     public String updateBooking(@PathVariable Long id, @ModelAttribute Booking booking,
                                 BindingResult result, Model model) {
