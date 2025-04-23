@@ -38,7 +38,7 @@ public class RegisterController {
         Admin admin = new Admin();
         admin.setName(name);
         admin.setUsername(username);
-        admin.setPassword(password); // Storing plain text password (not recommended for production)
+        admin.setPassword(password); // Storing plain text password 
 
         adminRepository.save(admin);
 
